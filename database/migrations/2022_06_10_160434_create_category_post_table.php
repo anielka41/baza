@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('category_post', function (Blueprint $table) {
-            $table->increments('id');
-            $table->foreignId('category_id')->onUpdate('cascade')->onDelete('cascade');;
-            $table->foreignId('post_id')->onUpdate('cascade')->onDelete('cascade');;
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('post_id');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }
 

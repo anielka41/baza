@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Post;
 use App\Models\User;
 
 class HomeController extends Controller
@@ -25,7 +27,8 @@ class HomeController extends Controller
     {
 
         $userCount = User::count();
+        $postCount = Post::count();
 
-        return view('backend.home', compact('userCount'));
+        return view('backend.home', compact('userCount', 'postCount'));
     }
 }

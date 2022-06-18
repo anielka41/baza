@@ -102,8 +102,7 @@
                                         @foreach( $categories as $category)
                                             <li>
                                                 <input type="checkbox" name="category[]" value="{{ $category->id }}" id="{{ $category->id }}"
-                                                        {{ $category->id == 1 ? 'checked' : null }}
-                                                >
+                                                       @if(in_array($category->id, $post->categories->pluck('id')->toArray()))checked @endif >
                                                 <label for="{{ $category->id }}">{{ $category->name}}</label>
                                             </li>
                                         @endforeach

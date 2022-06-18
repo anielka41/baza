@@ -36,7 +36,7 @@
                     <tbody>
                     @foreach($users as $user)
                     <tr class="align-middle">
-                        <th scope="row">{{ $user->id }}</th>
+                        <td>{{ $user->id }}</td>
                         <td><a href="{{ route('users.edit', $user->id) }}">{{ $user->name }}</a></td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->updated_at }}</td>

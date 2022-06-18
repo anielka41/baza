@@ -70,12 +70,11 @@ class PostController extends Controller
             'comment' => $request->has('comment'),
         ]);
 
-        $post->save();
-
         foreach ((array) $request->category as $value) {
             $post->categories()->attach($value);
         }
 
+        $post->save();
 
         return redirect(route('posts.edit', $post->id))->with('success', 'Wpis został utworzona!');
     }
@@ -120,16 +119,12 @@ class PostController extends Controller
         $input['seo_nofollow'] = $request->has('seo_nofollow');
         $input['comment'] = $request->has('comment');
 
-
-        foreach ((array) $request->category as $value) {
-            $post->categories()->attach($value);
-        }
-
         $post->fill($input)->save();
 
-
-
-
+        foreach ((array) $request->category as $value) {
+            $values[] = $value;
+        }
+        $post->categories()->sync($values);
 
         return back()->with("status", "Wpis został zaktualizowana!");
     }

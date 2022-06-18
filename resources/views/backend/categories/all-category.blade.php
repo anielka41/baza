@@ -46,7 +46,7 @@
                         <tr class="align-middle">
                             <?php $dash=''; ?>
                             <td>{{$_SESSION['i']}}</td>
-                            <td>{{$category->name}}</td>
+                            <td><a href="{{Route('editCategory', $category->id)}}">{{$category->name}}</a></td>
                             <td>{{$category->slug}}</td>
                             <td>
                                 @if(isset($category->parent_id))

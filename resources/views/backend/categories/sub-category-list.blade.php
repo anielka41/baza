@@ -3,7 +3,7 @@
     <?php $_SESSION['i']=$_SESSION['i']+1; ?>
     <tr>
         <td>{{$_SESSION['i']}}</td>
-        <td>{{$dash}}{{$subcategory->name}}</td>
+        <td>{{$dash}} <a href="{{Route('editCategory', $subcategory->id)}}">{{$subcategory->name}}</a></td>
         <td>{{$subcategory->slug}}</td>
         <td>{{$subcategory->parent->name}}</td>
         <td>@if($subcategory->posts->count())
