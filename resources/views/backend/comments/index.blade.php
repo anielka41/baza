@@ -23,6 +23,7 @@
                         <th scope="col">Treść</th>
                         <th scope="col">Komentarz w</th>
                         <th scope="col">Data publikacji</th>
+                        <th scope="col">Status</th>
                         <th scope="col" class="text-center">Działania</th>
                     </tr>
                     </thead>
@@ -34,8 +35,19 @@
                             <td>{{ $comment->id }}</td>
                             <td>{{ $comment->user->name }}</td>
                             <td>{{ $comment->body }}</td>
-                            <td>{{ $comment->commentable_id }}</td>
-                            <td>{{ $comment->created_at }}</td>
+                            <td>{{ $comment->post->title }}</td>
+                            <td style="font-size: 13px">{{ $comment->created_at }}</td>
+                            <td>
+                                @if($comment->status == 0)
+                                    <span class="badge bg-info">Oczekuje</span>
+                                @elseif($comment->status == 1)
+                                    <span class="badge bg-success">Zatwierdzony</span>
+                                @elseif($comment->status == 2)
+                                    <span class="badge bg-danger">Odrzucony</span>
+                                @else
+                                    <span class="badge bg-light">Odłożony</span>
+                                @endif
+                            </td>
                             <td>
                                 <div class="dropdown text-center">
                                     <button class="btn d-flex align-items-center justify-content-center m-auto" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
