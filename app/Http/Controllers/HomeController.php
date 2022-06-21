@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 
@@ -27,7 +28,8 @@ class HomeController extends Controller
 
         $userCount = User::count();
         $postCount = Post::count();
+        $commentCount = Comment::count();
 
-        return view('backend.home', compact('userCount', 'postCount'));
+        return view('backend.home', compact('userCount', 'postCount', 'commentCount'));
     }
 }

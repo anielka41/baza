@@ -6,6 +6,9 @@
             <i class='bi bi-card-list nav_icon'></i>
             <span class="nav_name">Wpisy</span>
         </a>
+        <a href="{{ route('comments') }}" class="nav_link mb-0">
+            <i class='bi bi-chat-quote nav_icon'></i> <span class="nav_name">Komentarze</span>
+        </a>
         <a href="{{ route('allCategories') }}" class="nav_link mb-0">
             <i class='bi bi-shuffle nav_icon'></i>
             <span class="nav_name">Kategorie</span>
@@ -21,11 +24,6 @@
         <a href="{{ route('users') }}" class="nav_link mb-0">
             <i class='bi bi-people nav_icon'></i>
             <span class="nav_name">Użytkownicy</span>
-        </a>
-
-
-        <a href="#" class="nav_link mb-0">
-            <i class='bi bi-shuffle nav_icon'></i> <span class="nav_name">Stats</span>
         </a>
     </div>
 </div>

@@ -6,9 +6,9 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <p>{{ $post->title }}</p>
+                        <h1>{{ $post->title }}</h1>
                         <p>
-                            {{ $post->content }}
+                            {!! $post->content !!}
                         </p>
 
                         <hr />
@@ -33,3 +33,9 @@
         </div>
     </div>
 @endsection
+
+<style>
+    .display-comment .display-comment {
+        margin-left: 30px;
+    }
+</style>

@@ -76,6 +76,9 @@ Route::middleware(['auth'])->group(function () {
         Route::any('/category/{id}/edit/', [CategoryController::class, 'editCategory'])->name('editCategory');
         Route::delete('/category/{id}', [CategoryController::class, 'deleteCategory'])->name('deleteCategory');
 
+        //Comments
+        Route::get('/comments', [CommentController::class, 'index'])->name('comments');
+
     });
 });
 

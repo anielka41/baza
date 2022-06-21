@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    public function index()
+    {
+        $comments = Comment::paginate(10);
+
+        return view('backend.comments.index', compact('comments'));
+    }
+
     public function store(Request $request)
     {
         $comment = new Comment;

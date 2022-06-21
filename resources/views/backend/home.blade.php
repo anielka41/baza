@@ -54,7 +54,7 @@
                                     Komentarze:
                                 </div>
                                 <div class="h4 mb-0 fw-bold text-secondary">
-                                    111
+                                    {{ $commentCount }}
                                 </div>
                             </div>
                             <div class="col-auto">
