@@ -18,6 +18,12 @@ use Illuminate\View\View;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -82,12 +88,14 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @param  $id
+     * @return Application|View
      */
-    public function show(Post $post)
+    public function show($id): Application|View
     {
-        //
+        $post = Post::find($id);
+
+        return view('frontend.post.show', compact('post'));
     }
 
     /**

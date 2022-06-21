@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Categories\CategoryController;
+use App\Http\Controllers\Comments\CommentController;
 use App\Http\Controllers\FileManagerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Pages\PageController;
@@ -81,3 +82,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+// FRONTEND
+Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+Route::post('/comment/store', [CommentController::class, 'store'])->name('comment.add');
+Route::post('/reply/store', [CommentController::class, 'replyStore'])->name('reply.add');
