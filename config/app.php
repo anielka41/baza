@@ -187,7 +187,7 @@ return [
          */
 
         Intervention\Image\ImageServiceProvider::class,
-
+        Mtvs\EloquentApproval\ApprovalServiceProvider::class,
         /*
          * Application Service Providers...
          */

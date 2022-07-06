@@ -20,7 +20,7 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Autor</th>
-                        <th scope="col">Treść</th>
+                        <th scope="col" style="max-width: 500px; display: block;">Treść</th>
                         <th scope="col">Komentarz w</th>
                         <th scope="col">Data publikacji</th>
                         <th scope="col">Status</th>
@@ -34,40 +34,48 @@
 
                             <td>{{ $comment->id }}</td>
                             <td>{{ $comment->user->name }}</td>
-                            <td>{{ $comment->body }}</td>
+                            <td style="max-width: 500px; font-size: 14px">{{ $comment->body }}</td>
                             <td>{{ $comment->post->title }}</td>
                             <td style="font-size: 13px">{{ $comment->created_at }}</td>
                             <td>
-                                @if($comment->status == 0)
+                                @if($comment->status == 'pending')
                                     <span class="badge bg-info">Oczekuje</span>
-                                @elseif($comment->status == 1)
+                                @elseif($comment->status == 'approved')
                                     <span class="badge bg-success">Zatwierdzony</span>
-                                @elseif($comment->status == 2)
+                                @elseif($comment->status == 'rejected')
                                     <span class="badge bg-danger">Odrzucony</span>
                                 @else
-                                    <span class="badge bg-light">Odłożony</span>
+                                    <span class="badge bg-secondary text-black">Zawieszony</span>
                                 @endif
                             </td>
                             <td>
-                                <div class="dropdown text-center">
-                                    <button class="btn d-flex align-items-center justify-content-center m-auto" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class='bi bi-three-dots-vertical fs-5'></i>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li>
-                                            <a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ route('pages.edit', $comment->id) }}">
-                                                <i class='bi bi-pencil-square me-1'></i>
-                                                Edytuj
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <button class="dropdown-item dropdown-item d-flex align-items-center justify-content-start delete" data-id="{{ $comment->id }}">
-                                                <i class='bi bi-trash me-1'></i>
-                                                Usuń
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <ul class="p-0 m-0 mb-2 text-end">
+
+
+                                    <li class="list-inline-item">
+                                        <button value="0" type="button" class="btn btn-success btn-sm ajaxSubmit" data-id="{{ $comment->id }}">
+                                            <i class="bi bi-check-circle"></i> Zatwierdź
+                                        </button>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button value="1" type="button" class="btn btn-info btn-sm ajaxSubmit" data-id="{{ $comment->id }}">
+                                            <i class="bi bi-question-circle"></i> Oczekuje
+                                        </button>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <button value="2" type="button" class="btn btn-danger btn-sm ajaxSubmit" data-id="{{ $comment->id }}">
+                                            <i class="bi bi-dash-circle"></i> Odrzucić
+                                        </button>
+                                    </li>
+
+
+                                    <li class="list-inline-item">
+                                        <button class="btn btn-secondary btn-sm delete" data-id="{{ $comment->id }}">
+                                            <i class="bi bi-trash3"></i> Usuń
+                                        </button>
+                                    </li>
+                                </ul>
+
                             </td>
 
                         </tr>
@@ -84,10 +92,34 @@
 @section('javascript')
     <script>
         let deleteUrl;
-        deleteUrl = "{{ url('cp-admin/comment') }}/";
+        let deleteUrl2;
+        deleteUrl = "{{ url('cp-admin/comments') }}/";
+        deleteUrl2 = "{{ url('cp-admin/comments/update') }}/";
     </script>
 @endsection
 
 @section('js-files')
     <script src="{{ asset('js/delete.js') }}"></script>
+
+
+
+    <script>
+        jQuery(document).ready(function(){
+            jQuery('.ajaxSubmit').click(function(e){
+                e.preventDefault();
+
+                jQuery.ajax({
+                    url: deleteUrl2 + $(this).data("id"),
+                    method: 'post',
+                    data: {
+                        id: $(this).data("id"),
+                        value: this.value,
+                    },
+                    success: function(result){
+                        console.log(result);
+                        window.location.reload();
+                    }});
+            });
+        });
+    </script>
 @endsection

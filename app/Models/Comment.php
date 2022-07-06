@@ -2,11 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasAttributes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Mtvs\EloquentApproval\Approvable;
 
 class Comment extends Model
 {
+
+    use Approvable, Notifiable;
+
+    const APPROVAL_STATUS = 'status';
+    const APPROVAL_AT = 'approval_at';
 
     protected $fillable = [
         'body',
@@ -14,6 +20,7 @@ class Comment extends Model
         'commentable_id',
         'commentable_type',
         'status',
+        'approval_at',
     ];
 
     public function user()

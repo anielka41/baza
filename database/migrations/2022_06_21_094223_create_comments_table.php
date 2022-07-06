@@ -20,7 +20,8 @@ return new class extends Migration
             $table->text('body');
             $table->integer('commentable_id')->unsigned();
             $table->string('commentable_type');
-            $table->tinyInteger('status')->unsigned()->default(0);
+            $table->string('status')->default('pending');
+            $table->dateTime('approval_at')->nullable();
             $table->timestamps();
         });
     }

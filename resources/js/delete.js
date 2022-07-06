@@ -26,7 +26,7 @@ $(function () {
                     .done(function (data) {
                         Swal.fire(
                             'Dobra robota!',
-                            'Użytkownik został usunięty!',
+                            'Pozycja została usunięta!',
                             'success'
                         ).then(function() {
                             window.location.reload();
